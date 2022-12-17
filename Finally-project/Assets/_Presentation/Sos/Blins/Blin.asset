@@ -9,6 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 23f736c485de44098563710c92881357, type: 3}
-  m_Name: Parameters Player
+  m_Script: {fileID: 11500000, guid: a25407e2c101c4e8896e2e2f690b81eb, type: 3}
+  m_Name: Blin
   m_EditorClassIdentifier: 
+  blinBody: {fileID: 0}
+  score: 0

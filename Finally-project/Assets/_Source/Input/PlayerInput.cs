@@ -35,15 +35,6 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""FireKeyBoard"",
-                    ""type"": ""Button"",
-                    ""id"": ""f383e4cd-5446-4ae4-9815-04e60c534ef3"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -57,17 +48,6 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""action"": ""FireMouse"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""6964b1d3-87f8-4e87-afb9-480c9d792465"",
-                    ""path"": ""<Keyboard>/space"",
-                    ""interactions"": ""Press(behavior=2)"",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""FireKeyBoard"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -77,7 +57,6 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_FireMouse = m_Player.FindAction("FireMouse", throwIfNotFound: true);
-        m_Player_FireKeyBoard = m_Player.FindAction("FireKeyBoard", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -138,13 +117,11 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Player;
     private IPlayerActions m_PlayerActionsCallbackInterface;
     private readonly InputAction m_Player_FireMouse;
-    private readonly InputAction m_Player_FireKeyBoard;
     public struct PlayerActions
     {
         private @PlayerInput m_Wrapper;
         public PlayerActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @FireMouse => m_Wrapper.m_Player_FireMouse;
-        public InputAction @FireKeyBoard => m_Wrapper.m_Player_FireKeyBoard;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -157,9 +134,6 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @FireMouse.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFireMouse;
                 @FireMouse.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFireMouse;
                 @FireMouse.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFireMouse;
-                @FireKeyBoard.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFireKeyBoard;
-                @FireKeyBoard.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFireKeyBoard;
-                @FireKeyBoard.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFireKeyBoard;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -167,9 +141,6 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @FireMouse.started += instance.OnFireMouse;
                 @FireMouse.performed += instance.OnFireMouse;
                 @FireMouse.canceled += instance.OnFireMouse;
-                @FireKeyBoard.started += instance.OnFireKeyBoard;
-                @FireKeyBoard.performed += instance.OnFireKeyBoard;
-                @FireKeyBoard.canceled += instance.OnFireKeyBoard;
             }
         }
     }
@@ -177,6 +148,5 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     public interface IPlayerActions
     {
         void OnFireMouse(InputAction.CallbackContext context);
-        void OnFireKeyBoard(InputAction.CallbackContext context);
     }
 }

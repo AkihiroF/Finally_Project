@@ -1,5 +1,4 @@
 using _Source.Input;
-using _Source.Player;
 
 namespace _Source.Core
 {
@@ -18,19 +17,23 @@ namespace _Source.Core
         {
             EnableInput();
         }
+
+        public void PauseGame()
+        {
+            DisableInput();
+        }
         
         private void Bind()
         {
             _input.Player.FireMouse.performed += _inputHandler.InputFire;
-            _input.Player.FireKeyBoard.performed += _inputHandler.InputFire;
         }
 
-        public void EnableInput()
+        private void EnableInput()
         {
             _input.Player.Enable();
         }
 
-        public void DisableInput()
+        private void DisableInput()
         {
             _input.Player.Disable();
         }
