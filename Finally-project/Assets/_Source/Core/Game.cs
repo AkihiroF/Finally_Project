@@ -1,4 +1,6 @@
 using _Source.Input;
+using _Source.Services;
+using UnityEngine;
 
 namespace _Source.Core
 {
@@ -6,10 +8,14 @@ namespace _Source.Core
     {
         private PlayerInput _input;
         private InputHandler _inputHandler;
-        public Game(PlayerInput input,InputHandler inputHandler)
+        private SpawnerGameObject _spawner;
+        public static ObjectPool ObjectPool { get; private set; }
+        public Game(PlayerInput input,InputHandler inputHandler, ObjectPool pool, SpawnerGameObject spawner)
         {
             _input = input;
             _inputHandler = inputHandler;
+            ObjectPool = pool;
+            _spawner = spawner;
             Bind();
         }
 
@@ -18,6 +24,22 @@ namespace _Source.Core
             EnableInput();
         }
 
+        public void SpawnBlins(int count, GameObject firstType, GameObject secondType, Vector3 position)
+        {
+            for (int i = 0; i < count; i++)
+            {
+                Transform blin;
+                if (i % 2 == 1)
+                {
+                    blin = _spawner.SpawnObject(firstType).transform;
+                }
+                else
+                {
+                    blin = _spawner.SpawnObject(secondType).transform;
+                }
+                blin.transform.position = position;
+            }
+        }
         public void PauseGame()
         {
             DisableInput();

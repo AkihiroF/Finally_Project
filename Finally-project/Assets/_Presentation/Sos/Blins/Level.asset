@@ -9,8 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a25407e2c101c4e8896e2e2f690b81eb, type: 3}
-  m_Name: Blin
+  m_Script: {fileID: 11500000, guid: 0c4dc8911f2647548c48c67923ea0cbf, type: 3}
+  m_Name: Level
   m_EditorClassIdentifier: 
-  blinBody: {fileID: 8009734311186717296, guid: 8cb14af2807aa4ccb833da03e72ef364, type: 3}
-  score: 0
+  parameters:
+  - key: {fileID: 11400000, guid: e8917ea7a1be44fd8b79edac94a88bc6, type: 2}
+    value: 3
+  - key: {fileID: 11400000, guid: 1216cf4fba6c14d9ab267692d532e762, type: 2}
+    value: 4

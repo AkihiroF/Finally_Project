@@ -13,8 +13,7 @@ namespace _Source.Input
         }
         public void InputFire(InputAction.CallbackContext context)
         {
-            var isFire = context.ReadValue<float>() != 0;
-            _player.ActivateFire(isFire);
+            _player.Fire();
         }
     }
 }

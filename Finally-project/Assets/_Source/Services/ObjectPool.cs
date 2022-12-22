@@ -1,57 +1,54 @@
 using System;
 using System.Collections.Generic;
-using _Source.Core;
 using UnityEngine;
+using Object = System.Object;
 
 namespace _Source.Services
 {
     public class ObjectPool
     {
-        private Dictionary<GameObject, List<GameObject>> _objectInPool;
+        private Dictionary<Type, List<object>> _objects;
         private SpawnerGameObject _spawner;
 
         public ObjectPool(SpawnerGameObject spawner)
         {
-            _objectInPool = new Dictionary<GameObject, List<GameObject>>();
+            _objects = new Dictionary<Type, List<object>>();
             _spawner = spawner;
         }
 
-        public void AddNewTypeObject(GameObject type)
-        {
-            if (_objectInPool[type] != null)
-            {
-                return;
-            }
-            _objectInPool.Add(type, new List<GameObject>());
-        }
-
-        public void AddObjectToPool(GameObject obj)
+        public void AddNewType(Type type)
         {
             try
             {
-                _objectInPool[obj].Add(obj);
+                _objects.Add(type, new List<object>());
             }
             catch (Exception e)
             {
-                Debug.Log(e);
+                Debug.Log("Type in pool");
             }
         }
 
-        // public void ActivateGameObject(Type type, Vector3 position)
-        // {
-        //     try
-        //     {
-        //         _objectInPool[type][0].transform.position = position;
-        //         _objectInPool[type][0].SetActive(true);
-        //     }
-        //     catch (Exception e)
-        //     {
-        //         Debug.Log(e);
-        //         if (e.GetType() == typeof(NullReferenceException))
-        //         {
-        //             AddNewTypeObject(type);
-        //         }
-        //     }
-        // }
+        public bool AddObject(Type type, object target)
+        {
+            try
+            {
+                _objects[type].Add(target);
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
+
+        public Object GetObject(Type type)
+        {
+            if (_objects[type].Count > 1)
+            {
+                return _objects[type][1];
+            }
+
+            return _spawner.SpawnObject((GameObject)_objects[type][0]);
+        }
     }
 }
